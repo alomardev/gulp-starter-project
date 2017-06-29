@@ -11,38 +11,6 @@ autoprefixer = require('gulp-autoprefixer'),
     delEmpty = require('delete-empty'),
          del = require('del');
 
-/* Clean */
-gulp.task('clean:scripts', function() {
-	del.sync('dist/assets/main.min.js');
-});
-
-gulp.task('clean:styles', function() {
-	del.sync('dist/assets/main.min.css');
-});
-
-gulp.task('clean:htmls', ['clean:empty'], function() {
-	del.sync('dist/**/*.html');
-});
-
-gulp.task('clean:images', function() {
-	del.sync('dist/assets/images/*.{png,gif,jpg,jpeg}');
-});
-
-gulp.task('clean:raw', function() {
-	del.sync('dist/raw');
-});
-
-gulp.task('clean:empty', function() {
-	delEmpty.sync('dist/');
-});
-
-gulp.task('clean', function() {
-	del.sync('dist');
-});
-
-/* Build */
-gulp.task('build', ['scripts', 'styles', 'htmls', 'copy:images', 'copy:raw']);
-
 /* Scripts */
 gulp.task('scripts', ['clean:scripts'], function() {
 	return gulp.src('app/assets/scripts/*.js')
@@ -95,8 +63,40 @@ gulp.task('connect', function() {
 	});
 });
 
+/* Clean */
+gulp.task('clean:scripts', function() {
+	del.sync('dist/assets/main.min.js');
+});
+
+gulp.task('clean:styles', function() {
+	del.sync('dist/assets/main.min.css');
+});
+
+gulp.task('clean:htmls', ['clean:empty'], function() {
+	del.sync('dist/**/*.html');
+});
+
+gulp.task('clean:images', function() {
+	del.sync('dist/assets/images/*.{png,gif,jpg,jpeg}');
+});
+
+gulp.task('clean:raw', function() {
+	del.sync('dist/raw');
+});
+
+gulp.task('clean:empty', function() {
+	delEmpty.sync('dist/');
+});
+
+gulp.task('clean', function() {
+	del.sync('dist');
+});
+
+/* Build */
+gulp.task('build', ['scripts', 'styles', 'htmls', 'copy:images', 'copy:raw']);
+
 /* Watch */
-gulp.task('watch', ['connect'], function() {
+gulp.task('watch', ['build'], function() {
 	gulp.watch('app/assets/scripts/*.js', ['scripts']);
 	gulp.watch('app/assets/styles/*.scss', ['styles']);
 	gulp.watch('app/**/*.html', ['htmls']);
@@ -105,4 +105,4 @@ gulp.task('watch', ['connect'], function() {
 });
 
 /* Default */
-gulp.task('default', ['scripts', 'styles', 'htmls', 'copy:images', 'copy:raw', 'watch']);
+gulp.task('default', ['connect', 'watch']);
