@@ -7,9 +7,9 @@ autoprefixer = require('gulp-autoprefixer'),
       uglify = require('gulp-uglify'),
       concat = require('gulp-concat'),
  fileinclude = require('gulp-file-include'),
+     connect = require('gulp-connect'),
     delEmpty = require('delete-empty'),
-         del = require('del'),
- browserSync = require('browser-sync');
+         del = require('del');
 
 /* Clean */
 gulp.task('clean:scripts', function() {
@@ -50,7 +50,7 @@ gulp.task('scripts', ['clean:scripts'], function() {
 	.pipe(concat('main.min.js'))
 	.pipe(uglify())
 	.pipe(gulp.dest('dist/assets'))
-	.pipe(browserSync.stream());
+	.pipe(connect.reload());
 });
 
 /* Styles */
@@ -62,7 +62,7 @@ gulp.task('styles', ['clean:styles'], function() {
 	.pipe(concat('main.min.css'))
 	.pipe(cssnano())
 	.pipe(gulp.dest('dist/assets'))
-	.pipe(browserSync.stream());
+	.pipe(connect.reload());
 });
 
 /* HTMLs */
@@ -72,7 +72,7 @@ gulp.task('htmls', ['clean:htmls'], function() {
 	.pipe(fileinclude(/* Default: {prefix: '@@', path: '@file'} */))
 	.pipe(htmlmin({collapseWhitespace: true}))
 	.pipe(gulp.dest('dist'))
-	.pipe(browserSync.stream());
+	.pipe(connect.reload());
 });
 
 /* Copy images */
@@ -88,12 +88,15 @@ gulp.task('copy:raw', ['clean:raw'], function() {
 });
 
 /* Server setup */
-gulp.task('browser-sync', function() {
-	browserSync.init({server: {baseDir: './dist'}});
+gulp.task('connect', function() {
+	connect.server({
+		root: './dist/',
+		livereload: true
+	});
 });
 
 /* Watch */
-gulp.task('watch', ['browser-sync'], function() {
+gulp.task('watch', ['connect'], function() {
 	gulp.watch('app/assets/scripts/*.js', ['scripts']);
 	gulp.watch('app/assets/styles/*.scss', ['styles']);
 	gulp.watch('app/**/*.html', ['htmls']);
