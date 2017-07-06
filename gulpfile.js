@@ -4,8 +4,9 @@
 autoprefixer = require('gulp-autoprefixer'),
      htmlmin = require('gulp-htmlmin'),
      cssnano = require('gulp-cssnano'),
+          ts = require('gulp-typescript'),
       uglify = require('gulp-uglify'),
-      concat = require('gulp-concat'),
+      rename = require('gulp-rename'),
  fileinclude = require('gulp-file-include'),
      connect = require('gulp-connect'),
     delEmpty = require('delete-empty'),
@@ -13,22 +14,23 @@ autoprefixer = require('gulp-autoprefixer'),
 
 /* Scripts */
 gulp.task('scripts', ['clean:scripts'], function() {
-	return gulp.src('app/assets/scripts/*.js')
+	return gulp.src('app/assets/scripts/main.ts')
 	.pipe(plumber())
-	.pipe(concat('main.min.js'))
+	.pipe(ts())
 	.pipe(uglify())
+	.pipe(rename('main.min.js'))
 	.pipe(gulp.dest('dist/assets'))
 	.pipe(connect.reload());
 });
 
 /* Styles */
 gulp.task('styles', ['clean:styles'], function() {
-	return gulp.src('app/assets/styles/*.scss')
+	return gulp.src('app/assets/styles/main.{scss,sass}')
 	.pipe(plumber())
 	.pipe(sass())
 	.pipe(autoprefixer())
-	.pipe(concat('main.min.css'))
 	.pipe(cssnano())
+	.pipe(rename('main.min.css'))
 	.pipe(gulp.dest('dist/assets'))
 	.pipe(connect.reload());
 });
@@ -97,8 +99,8 @@ gulp.task('build', ['scripts', 'styles', 'htmls', 'copy:images', 'copy:raw']);
 
 /* Watch */
 gulp.task('watch', ['build'], function() {
-	gulp.watch('app/assets/scripts/*.js', ['scripts']);
-	gulp.watch('app/assets/styles/*.scss', ['styles']);
+	gulp.watch('app/assets/scripts/*.ts', ['scripts']);
+	gulp.watch('app/assets/styles/*.{scss,sass}', ['styles']);
 	gulp.watch('app/**/*.html', ['htmls']);
 	gulp.watch('app/assets/images/*.{png,gif,jpg,jpeg}', ['copy:images']);
 	gulp.watch('app/raw/**/*', ['copy:raw']);
