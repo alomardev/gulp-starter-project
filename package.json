@@ -1,6 +1,6 @@
 {
   "name": "gulp-starter-project",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Simple project template",
   "author": "Abdulrahman Al'omar",
   "repository": {
@@ -16,11 +16,10 @@
     "gulp-cssnano": "^2.1.2",
     "gulp-file-include": "^1.1.0",
     "gulp-htmlmin": "^3.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-match": "^1.0.3",
     "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
-    "gulp-typescript": "^3.1.7",
-    "gulp-uglify": "^3.0.0",
-    "typescript": "^2.4.1"
+    "gulp-uglify": "^3.0.0"
   }
 }

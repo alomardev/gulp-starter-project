@@ -58,7 +58,7 @@ typings/
 .env
 
 # gulp output folder
-dist
+bulid
 
 # System
 **/.DS_Store
