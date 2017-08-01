@@ -123,7 +123,7 @@ gulp.task('build:prod', ['build'], function() {
 /* Watch */
 gulp.task('watch', ['build'], function() {
 	gulp.watch(dir.app + '/res/scripts/*.js', ['scripts']);
-	gulp.watch(dir.app + '/res/styles/*.{scss,sass}', ['styles']);
+	gulp.watch(dir.app + '/res/styles/**/*.{scss,sass}', ['styles']);
 	gulp.watch(dir.app + '/**/*.html', ['htmls']);
 	gulp.watch(dir.app + '/res/images/*.{png,svg,gif,jpg,jpeg}', ['copy:images']);
 	gulp.watch(dir.app + '/raw/**/*', ['copy:raw']);
