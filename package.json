@@ -1,18 +1,19 @@
 {
-  "name": "gulp-starter-project",
-  "version": "0.0.5",
-  "description": "Simple project template",
+  "name": "oyon-charity-wbs",
+  "version": "0.0.1",
+  "description": "Oyon Charity Web-Based System",
   "author": "Abdulrahman Al'omar",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alomardev/gulp-starter-project"
+    "url": "https://github.com/alomardev/oyon-charity-wbs"
   },
   "devDependencies": {
+    "child_process": "^1.0.2",
     "del": "^3.0.0",
     "delete-empty": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
-    "gulp-connect": "^5.0.0",
+    "gulp-connect-php": "^1.0.1",
     "gulp-cssnano": "^2.1.2",
     "gulp-file-include": "^1.1.0",
     "gulp-htmlmin": "^3.0.0",
