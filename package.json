@@ -1,11 +1,11 @@
 {
-  "name": "oyon-charity-wbs",
+  "name": "gulp-starter-project",
   "version": "0.0.1",
-  "description": "Oyon Charity Web-Based System",
+  "description": "Gulp Starter Project",
   "author": "Abdulrahman Al'omar",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alomardev/oyon-charity-wbs"
+    "url": "https://github.com/alomardev/gulp-starter-project"
   },
   "devDependencies": {
     "child_process": "^1.0.2",

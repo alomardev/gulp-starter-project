@@ -25,8 +25,8 @@ var config = {
 		dev: 'build/development'
 	},
 	php: {
-		bin: iswin ? 'C:\\Users\\coop\\backend\\php\\php.exe' : '/usr/bin/php',
-		ini: iswin ? 'C:\\Users\\coop\\backend\\php\\php.ini' : '/etc/php.ini'
+		bin: iswin ? 'C:\\php\\php.exe' : '/usr/bin/php',
+		ini: iswin ? 'C:\\php\\php.ini' : '/etc/php.ini'
 	}
 };
 
@@ -76,9 +76,9 @@ gulp.task('copy:raw', ['clean:raw'], function() {
 	.pipe(gulp.dest(config.dir.dev + '/raw'));
 });
 
-gulp.task('copy:plugins', ['clean:plugins'], function() {
-	return gulp.src(config.dir.app + '/plugins/**/*')
-	.pipe(gulp.dest(config.dir.dev + '/plugins'));
+gulp.task('copy:css', ['clean:css'], function() {
+	return gulp.src(config.dir.app + '/res/styles/*.css')
+	.pipe(gulp.dest(config.dir.dev + '/res'));
 });
 
 /* Clean */
@@ -87,7 +87,7 @@ gulp.task('clean:scripts', function() {
 });
 
 gulp.task('clean:styles', function() {
-	del.sync(config.dir.dev + '/res/main.css');
+	del.sync(config.dir.dev + '/res/*.css');
 });
 
 gulp.task('clean:markup', ['clean:empty'], function() {
@@ -102,8 +102,8 @@ gulp.task('clean:raw', function() {
 	del.sync(config.dir.dev + '/raw');
 });
 
-gulp.task('clean:plugins', function() {
-	del.sync(config.dir.dev + '/plugins');
+gulp.task('clean:css', function() {
+	del.sync(config.dir.dev + '/res/*.css');
 });
 
 gulp.task('clean:empty', function() {
@@ -116,7 +116,7 @@ gulp.task('clean', function() {
 });
 
 /* Build */
-gulp.task('build', ['scripts', 'styles', 'markup', 'copy:images', 'copy:raw', 'copy:plugins']);
+gulp.task('build', ['scripts', 'styles', 'markup', 'copy:images', 'copy:raw', 'copy:css']);
 gulp.task('build:dev', ['build']);
 gulp.task('build:prod', ['build'], function() {
 	del.sync(config.dir.prod);
