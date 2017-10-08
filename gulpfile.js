@@ -145,9 +145,9 @@ gulp.task('build:prod', ['build'], function() {
 gulp.task('watch', ['build'], function() {
 	gulp.watch(config.dir.app + '/res/scripts/*.js', ['scripts']);
 	gulp.watch(config.dir.app + '/res/styles/*.{scss,sass}', ['styles']);
+	gulp.watch(config.dir.app + '/res/styles/*.css', ['copy:css']);
 	gulp.watch(config.dir.app + '/**/*.{html,php}', ['markup']);
 	gulp.watch(config.dir.app + '/res/images/*.{png,gif,jpg,jpeg,svg,ico}', ['copy:images']);
-	
 	gulp.watch(config.dir.app + '/raw/**/*', ['copy:raw']);
 	gulp.watch(config.dir.app + '/plugins/**/*', ['copy:plugins']);
 });
